@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Design Bees — See How We Transform Brands</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Questrial&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --honey:    #F6BE38;
+    --midnight: #282B30;
+    --forest:   #4D7B1B;
+    --beeswax:  #F3EFD6;
+    --propolis: #A49362;
+    --cream:    #FAF8F0;
+    --grey:     #BFBFBF;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Questrial', sans-serif; background: var(--cream); color: var(--midnight); overflow-x: hidden; }
+
+  /* HEADER */
+  header { background: var(--midnight); padding: 18px 48px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; border-bottom: 3px solid var(--honey); }
+  .logo img { height: 36px; width: auto; display: block; }
+  .logo span { display: none; }
+  .header-cta { background: var(--forest); color: #fff; font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 13px; padding: 10px 22px; border: none; border-radius: 6px; cursor: pointer; text-decoration: none; transition: background 0.2s; }
+  .header-cta:hover { background: #05C84B; }
+
+  /* HERO */
+  .hero { background: var(--midnight); padding: 80px 48px 72px; text-align: center; position: relative; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 50% 120%, rgba(246,190,56,0.12) 0%, transparent 70%); pointer-events: none; }
+  .hero-eyebrow { display: inline-block; font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--honey); margin-bottom: 20px; background: rgba(246,190,56,0.1); padding: 6px 16px; border-radius: 20px; border: 1px solid rgba(246,190,56,0.3); }
+  .hero h1 { font-family: 'Poppins', sans-serif; font-weight: 800; font-size: clamp(32px,5vw,52px); color: #fff; line-height: 1.15; max-width: 760px; margin: 0 auto 20px; }
+  .hero h1 em { font-style: normal; color: var(--honey); }
+  .hero p { font-size: 17px; color: rgba(255,255,255,0.7); max-width: 600px; margin: 0 auto 36px; line-height: 1.7; }
+  .hero-stats { display: flex; justify-content: center; gap: 48px; margin-top: 24px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.1); }
+  .stat-item { text-align: center; }
+  .stat-num { font-family: 'Poppins', sans-serif; font-weight: 800; font-size: 32px; color: var(--honey); display: block; }
+  .stat-label { font-size: 13px; color: rgba(255,255,255,0.5); margin-top: 4px; }
+
+  /* FILTER BAR */
+  .filter-section { background: #fff; border-bottom: 1px solid rgba(0,0,0,0.08); padding: 14px 48px; display: flex; flex-direction: column; gap: 10px; position: sticky; top: 67px; z-index: 90; }
+  .filter-row { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+  .filter-label { font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; color: var(--propolis); min-width: 68px; }
+  .filter-pills { display: flex; gap: 8px; flex-wrap: wrap; }
+  .pill { font-family: 'Poppins', sans-serif; font-weight: 500; font-size: 13px; padding: 7px 16px; border-radius: 24px; border: 1.5px solid rgba(0,0,0,0.12); background: transparent; color: var(--midnight); cursor: pointer; transition: all 0.2s; }
+  .pill:hover { border-color: var(--honey); }
+  .pill.active { background: var(--honey); border-color: var(--honey); color: var(--midnight); font-weight: 600; }
+
+  /* PORTFOLIO GRID */
+  .portfolio-section { padding: 56px 48px; max-width: 1280px; margin: 0 auto; }
+  .section-label { font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--propolis); margin-bottom: 32px; }
+  .case-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 28px; }
+
+  /* CASE CARD */
+  .case-card { background: #fff; border-radius: 16px; overflow: hidden; cursor: pointer; transition: transform 0.25s, box-shadow 0.25s; box-shadow: 0 2px 12px rgba(0,0,0,0.06); border: 1.5px solid rgba(0,0,0,0.06); }
+  .case-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.12); border-color: var(--honey); }
+  .card-thumb-video { width: 100%; height: 220px; object-fit: cover; display: block; }
+  .card-body { padding: 24px; }
+  .card-tags { display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; }
+  .tag { font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 10px; letter-spacing: 1px; text-transform: uppercase; padding: 4px 10px; border-radius: 4px; background: var(--beeswax); color: var(--propolis); }
+  .tag.industry { background: rgba(77,123,27,0.1); color: var(--forest); }
+  .card-title { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 19px; color: var(--midnight); margin-bottom: 8px; line-height: 1.3; }
+  .card-desc { font-size: 14px; color: #666; line-height: 1.6; margin-bottom: 10px; }
+  .card-results { display: flex; gap: 16px; padding-top: 10px; border-top: 1px solid rgba(0,0,0,0.06); }
+  .result-item { flex: 1; text-align: center; }
+  .result-num { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 20px; color: var(--forest); display: block; }
+  .result-text { font-size: 11px; color: #999; margin-top: 6px; line-height: 1.4; }
+  .card-cta { display: flex; align-items: center; gap: 6px; font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 13px; color: var(--forest); margin-top: 16px; transition: gap 0.2s; }
+  .case-card:hover .card-cta { gap: 10px; }
+  .card-cta svg { transition: transform 0.2s; }
+  .case-card:hover .card-cta svg { transform: translateX(3px); }
+
+  /* PLACEHOLDER CARDS */
+  .placeholder-card { background: #fff; border-radius: 16px; border: 2px dashed rgba(0,0,0,0.1); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 48px 24px; text-align: center; min-height: 340px; }
+  .placeholder-icon { font-size: 32px; margin-bottom: 14px; opacity: 0.4; }
+  .placeholder-card h3 { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 16px; color: var(--midnight); margin-bottom: 8px; opacity: 0.5; }
+  .placeholder-card p { font-size: 13px; color: #aaa; }
+
+  /* MODAL */
+  .modal-overlay { position: fixed; inset: 0; background: rgba(20,22,25,0.85); z-index: 1000; display: flex; align-items: center; justify-content: center; padding: 24px; opacity: 0; pointer-events: none; transition: opacity 0.3s; backdrop-filter: blur(4px); }
+  .modal-overlay.open { opacity: 1; pointer-events: all; }
+  .modal { background: #fff; border-radius: 20px; width: 100%; max-width: 900px; max-height: 90vh; overflow-y: auto; position: relative; transform: translateY(24px) scale(0.98); transition: transform 0.35s cubic-bezier(0.16,1,0.3,1); scrollbar-width: thin; overflow: hidden; overflow-y: auto; }
+  .modal-overlay.open .modal { transform: translateY(0) scale(1); }
+  .modal-close { display: none; }
+  .close-btn { width: 36px; height: 36px; border-radius: 50%; background: rgba(0,0,0,0.08); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 18px; color: var(--midnight); transition: background 0.2s; }
+  .close-btn:hover { background: rgba(0,0,0,0.15); }
+  .modal-hero { width: 100%; background: var(--midnight); margin-top: 0; position: relative; }
+  .modal-header-bar { background: var(--midnight); padding: 22px 36px; border-radius: 20px 20px 0 0; border-bottom: 3px solid var(--honey); display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+  .modal-header-bar-text { flex: 1; }
+  .modal-client-tag { font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--honey); margin-bottom: 6px; }
+  .modal-title { font-family: 'Poppins', sans-serif; font-weight: 800; font-size: 26px; color: #fff; line-height: 1.2; }
+  .modal-hero video { width: 100%; max-height: 360px; object-fit: cover; display: block; }
+  .modal-hero-overlay { display: none; }
+  .modal-body { padding: 36px; }
+  .modal-section-title { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--propolis); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+  .modal-section-title::after { content: ''; flex: 1; height: 1px; background: rgba(0,0,0,0.08); }
+  .modal-two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 28px; }
+  .modal-col-box { background: var(--cream); border-radius: 12px; padding: 20px; border: 1px solid rgba(0,0,0,0.06); }
+  .modal-col-box h4 { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 13px; color: var(--midnight); margin-bottom: 8px; }
+  .modal-col-box p { font-size: 14px; color: #666; line-height: 1.65; }
+  .modal-results { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-bottom: 32px; }
+  .modal-result-card { background: var(--midnight); border-radius: 12px; padding: 20px; text-align: center; border: 1px solid rgba(246,190,56,0.2); }
+  .modal-result-num { font-family: 'Poppins', sans-serif; font-weight: 800; font-size: 28px; color: var(--honey); display: block; margin-bottom: 6px; }
+  .modal-result-label { font-size: 12px; color: rgba(255,255,255,0.6); line-height: 1.4; }
+
+  /* CAROUSEL */
+  .carousel-wrap { margin-bottom: 36px; }
+  .carousel { position: relative; overflow: hidden; border-radius: 12px; background: var(--midnight); }
+  .carousel-track { display: flex; transition: transform 0.4s cubic-bezier(0.16,1,0.3,1); }
+  .carousel-slide { min-width: 100%; }
+  .carousel-slide img { width: 100%; height: 420px; object-fit: contain; display: block; background: var(--midnight); cursor: zoom-in; }
+  .carousel-btn { position: absolute; top: 50%; transform: translateY(-50%); width: 44px; height: 44px; border-radius: 50%; background: rgba(255,255,255,0.95); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 18px; box-shadow: 0 4px 16px rgba(0,0,0,0.3); z-index: 5; transition: transform 0.2s, background 0.2s; }
+  .carousel-btn:hover { background: var(--honey); transform: translateY(-50%) scale(1.05); }
+  .carousel-btn.prev { left: 14px; }
+  .carousel-btn.next { right: 14px; }
+  .carousel-dots { display: flex; justify-content: center; gap: 8px; padding: 14px 0 4px; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--grey); cursor: pointer; transition: background 0.2s, transform 0.2s; border: none; }
+  .dot.active { background: var(--honey); transform: scale(1.3); }
+  .carousel-counter { text-align: center; font-family: 'Poppins', sans-serif; font-size: 12px; color: #999; margin-top: 6px; }
+
+  /* REEL PLACEHOLDER */
+  .reel-placeholder { background: var(--midnight); border-radius: 12px; padding: 40px; text-align: center; border: 2px dashed rgba(246,190,56,0.3); margin-bottom: 32px; }
+  .reel-placeholder p { font-family: 'Poppins', sans-serif; font-size: 14px; color: rgba(255,255,255,0.5); margin-top: 12px; }
+  .reel-icon { font-size: 36px; }
+
+  /* LIGHTBOX */
+  .lightbox { position: fixed; inset: 0; background: rgba(0,0,0,0.94); z-index: 2000; display: flex; align-items: center; justify-content: center; padding: 24px; opacity: 0; pointer-events: none; transition: opacity 0.25s; }
+  .lightbox.open { opacity: 1; pointer-events: all; }
+  .lightbox img { max-width: 100%; max-height: 90vh; object-fit: contain; border-radius: 8px; box-shadow: 0 24px 80px rgba(0,0,0,0.6); }
+  .lightbox-close { position: absolute; top: 20px; right: 20px; width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: #fff; font-size: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
+  .lightbox-close:hover { background: rgba(255,255,255,0.2); }
+
+  /* BOTTOM CTA */
+  .bottom-cta { background: var(--midnight); padding: 80px 48px; text-align: center; position: relative; overflow: hidden; }
+  .bottom-cta::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 80% at 50% 0%, rgba(246,190,56,0.1) 0%, transparent 70%); pointer-events: none; }
+  .bottom-cta h2 { font-family: 'Poppins', sans-serif; font-weight: 800; font-size: clamp(26px,4vw,40px); color: #fff; margin-bottom: 16px; line-height: 1.2; }
+  .bottom-cta h2 em { font-style: normal; color: var(--honey); }
+  .bottom-cta p { font-size: 16px; color: rgba(255,255,255,0.65); max-width: 560px; margin: 0 auto 36px; line-height: 1.7; }
+  .cta-btn { display: inline-block; background: var(--forest); color: #fff; font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 15px; padding: 16px 36px; border-radius: 8px; text-decoration: none; transition: background 0.2s, transform 0.2s; border: none; cursor: pointer; }
+  .cta-btn:hover { background: #05C84B; transform: translateY(-2px); }
+  .cta-footnote { margin-top: 16px; font-size: 13px; color: rgba(255,255,255,0.35); }
+
+  @media (max-width: 768px) {
+    header { padding: 16px 20px; }
+    .hero { padding: 56px 20px 48px; }
+    .hero-stats { gap: 24px; flex-wrap: wrap; }
+    .filter-section { padding: 12px 20px; }
+    .portfolio-section { padding: 36px 20px; }
+    .modal-body { padding: 20px; }
+    .modal-two-col { grid-template-columns: 1fr; }
+    .modal-results { grid-template-columns: 1fr 1fr; }
+    .bottom-cta { padding: 56px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo"><img src="logo-primary.png" alt="Design Bees" style="height:36px;width:auto;display:block;"></div>
+  <a href="#book-demo" class="header-cta">Book a Demo</a>
+</header>
+
+<section class="hero">
+  <div class="hero-eyebrow">Interactive Portfolio</div>
+  <h1>See How We <em>Transform Brands</em><br>with Purposeful Design</h1>
+  <p>Explore real work, real results. From bold branding to seamless digital layouts — browse the case studies below to see what flat-rate design support can do for your business.</p>
+  <div class="hero-stats">
+    <div class="stat-item"><span class="stat-num">10+</span><div class="stat-label">Industries served</div></div>
+    <div class="stat-item"><span class="stat-num">∞</span><div class="stat-label">Revisions included</div></div>
+    <div class="stat-item"><span class="stat-num">$545</span><div class="stat-label">Starting from / month</div></div>
+    <div class="stat-item"><span class="stat-num">10 day</span><div class="stat-label">Free trial — no credit card</div></div>
+  </div>
+</section>
+
+<div class="filter-section">
+  <div class="filter-row">
+    <span class="filter-label">Industry</span>
+    <div class="filter-pills" id="industryFilters">
+      <button class="pill active" data-filter="all">All</button>
+      <button class="pill" data-filter="construction">Construction</button>
+      <button class="pill" data-filter="agency">Agency Support</button>
+      <button class="pill" data-filter="it">IT &amp; Professional Services</button>
+      <button class="pill" data-filter="telco">Telecommunications</button>
+    </div>
+  </div>
+  <div class="filter-row">
+    <span class="filter-label">Service</span>
+    <div class="filter-pills" id="serviceFilters">
+      <button class="pill active" data-sfilter="all">All</button>
+      <button class="pill" data-sfilter="branding">Branding</button>
+      <button class="pill" data-sfilter="social">Social Media</button>
+      <button class="pill" data-sfilter="print">Print Collateral</button>
+      <button class="pill" data-sfilter="digital">Digital Design</button>
+    </div>
+  </div>
+</div>
+
+<section class="portfolio-section">
+  <div class="section-label">Case Studies — 1 of 4 loaded</div>
+  <div class="case-grid" id="caseGrid">
+
+    <div class="case-card" data-industry="construction" data-service="branding print" onclick="openModal('alder')">
+      <video class="card-thumb-video" autoplay muted loop playsinline>
+        <source src="alder-hero.mp4" type="video/mp4">
+      </video>
+      <div class="card-body">
+        <div class="card-tags">
+          <span class="tag industry">Construction</span>
+          <span class="tag">Branding</span>
+          <span class="tag">Print</span>
+        </div>
+        <div class="card-title">Alder Construction — Airlie Summit</div>
+        <div class="card-desc">A complete premium brand identity for a new Whitsundays residential development — from logo to launch collateral.</div>
+        <div class="card-results">
+          <div class="result-item">
+            <span class="result-num">✓</span>
+            <div class="result-text">Distinct brand launched</div>
+          </div>
+          <div class="result-item">
+            <span class="result-num">↑</span>
+            <div class="result-text">Buyer enquiries month 1</div>
+          </div>
+          <div class="result-item">
+            <span class="result-num">✓</span>
+            <div class="result-text">Initial lot sales</div>
+          </div>
+        </div>
+        <div class="card-cta">
+          View Project Details
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="placeholder-card">
+      <div class="placeholder-icon">🏢</div>
+      <h3>L&amp;M Creative</h3>
+      <p>Agency Support · Social Media<br>Case study coming soon</p>
+    </div>
+
+    <div class="placeholder-card">
+      <div class="placeholder-icon">💻</div>
+      <h3>Real ICT</h3>
+      <p>IT &amp; Professional Services · Digital Design<br>Case study coming soon</p>
+    </div>
+
+    <div class="placeholder-card">
+      <div class="placeholder-icon">📡</div>
+      <h3>Vonex</h3>
+      <p>Telecommunications · Branding<br>Case study coming soon</p>
+    </div>
+
+  </div>
+</section>
+
+<section class="bottom-cta" id="book-demo">
+  <h2>Ready to <em>Transform</em><br>Your Creative Process?</h2>
+  <p>Stop struggling with DIY design or unreliable freelancers. Get access to a dedicated, experienced designer with unlimited requests and revisions — all for one flat monthly fee. No contracts, no hassle.</p>
+  <a href="https://designbees.com.au" class="cta-btn">Book a Demo Today</a>
+  <div class="cta-footnote">Or start your 10-day free trial — no credit card required</div>
+</section>
+
+<!-- MODAL: ALDER -->
+<div class="modal-overlay" id="modal-alder" onclick="closeModalOutside(event)">
+  <div class="modal">
+    <div class="modal-hero">
+      <div class="modal-header-bar">
+        <div class="modal-header-bar-text">
+          <div class="modal-client-tag">Case Study — Construction</div>
+          <div class="modal-title">Alder Construction — Airlie Summit Development</div>
+        </div>
+        <button class="close-btn" onclick="closeModal('alder')" style="flex-shrink:0;background:rgba(255,255,255,0.12);color:#fff;border:1px solid rgba(255,255,255,0.2);">✕</button>
+      </div>
+      <video autoplay muted loop playsinline style="width:100%;max-height:360px;object-fit:cover;display:block;">
+        <source src="alder-hero.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="modal-body">
+      <div class="modal-two-col">
+        <div class="modal-col-box">
+          <h4>🎯 The Challenge</h4>
+          <p>Alder needed a compelling, premium brand identity for their new "Airlie Summit" development to attract local residential buyers and stand out in a crowded real estate market.</p>
+        </div>
+        <div class="modal-col-box">
+          <h4>💡 The Solution</h4>
+          <p>We developed a complete, cohesive branding package — fresh logo design, high-end print brochures, signage, event collateral, and engaging digital layouts focused on buyer experience.</p>
+        </div>
+      </div>
+
+      <div class="modal-section-title">Results</div>
+      <div class="modal-results">
+        <div class="modal-result-card">
+          <span class="modal-result-num">✓</span>
+          <div class="modal-result-label">Distinct, recognisable<br>development brand launched</div>
+        </div>
+        <div class="modal-result-card">
+          <span class="modal-result-num">↑</span>
+          <div class="modal-result-label">Prospective buyer enquiries<br>within first month</div>
+        </div>
+        <div class="modal-result-card">
+          <span class="modal-result-num">✓</span>
+          <div class="modal-result-label">Accelerated initial lot sales<br>via improved collateral</div>
+        </div>
+      </div>
+
+      <div class="modal-section-title">Campaign in Action</div>
+      <div class="reel-placeholder">
+        <div class="reel-icon">📱</div>
+        <p>Instagram Reel embed goes here<br><span style="font-size:12px;opacity:0.6;">Paste the Reel URL from @Alder_Group_ to activate</span></p>
+      </div>
+
+      <div class="modal-section-title">Print &amp; Digital Assets</div>
+      <div class="carousel-wrap">
+        <div class="carousel" id="carousel-alder">
+          <div class="carousel-track" id="track-alder">
+            <div class="carousel-slide"><img src="alder-fullpage.png" alt="Core Lifestyle Full Page Advert" onclick="openLightbox(this.src)"></div>
+            <div class="carousel-slide"><img src="alder-cocktail.png" alt="Cocktail Card — Airlie Race Week" onclick="openLightbox(this.src)"></div>
+            <div class="carousel-slide"><img src="alder-welcome.png" alt="Sales Display Welcome Sign" onclick="openLightbox(this.src)"></div>
+            <div class="carousel-slide"><img src="alder-sign.png" alt="Raintree Place V-Frame Sign" onclick="openLightbox(this.src)"></div>
+          </div>
+          <button class="carousel-btn prev" onclick="moveCarousel('alder',-1)">&#8592;</button>
+          <button class="carousel-btn next" onclick="moveCarousel('alder',1)">&#8594;</button>
+        </div>
+        <div class="carousel-dots" id="dots-alder">
+          <button class="dot active" onclick="goToSlide('alder',0)"></button>
+          <button class="dot" onclick="goToSlide('alder',1)"></button>
+          <button class="dot" onclick="goToSlide('alder',2)"></button>
+          <button class="dot" onclick="goToSlide('alder',3)"></button>
+        </div>
+        <div class="carousel-counter" id="counter-alder">1 / 4 — Click any image to zoom</div>
+      </div>
+
+      <div style="text-align:center;padding:24px;background:var(--cream);border-radius:12px;">
+        <p style="font-family:'Poppins',sans-serif;font-weight:600;font-size:15px;margin-bottom:12px;">Want results like this for your business?</p>
+        <a href="https://designbees.com.au" class="cta-btn">Book a Demo Today</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+  <img id="lightbox-img" src="" alt="">
+</div>
+
+<script>
+  let activeIndustry = 'all', activeService = 'all';
+  document.querySelectorAll('[data-filter]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('[data-filter]').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      activeIndustry = btn.dataset.filter;
+      filterCards();
+    });
+  });
+  document.querySelectorAll('[data-sfilter]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('[data-sfilter]').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      activeService = btn.dataset.sfilter;
+      filterCards();
+    });
+  });
+  function filterCards() {
+    document.querySelectorAll('.case-card').forEach(card => {
+      const matchI = activeIndustry === 'all' || (card.dataset.industry||'').includes(activeIndustry);
+      const matchS = activeService  === 'all' || (card.dataset.service ||'').includes(activeService);
+      card.style.display = (matchI && matchS) ? '' : 'none';
+    });
+  }
+  function openModal(id) { var overlay = document.getElementById('modal-'+id); overlay.classList.add('open'); document.body.style.overflow='hidden'; overlay.querySelector('.modal').scrollTop = 0; }
+  function closeModal(id) { document.getElementById('modal-'+id).classList.remove('open'); document.body.style.overflow=''; }
+  function closeModalOutside(e) { if(e.target.classList.contains('modal-overlay')){ e.target.classList.remove('open'); document.body.style.overflow=''; } }
+  document.addEventListener('keydown', e => {
+    if(e.key==='Escape'){
+      document.querySelectorAll('.modal-overlay.open').forEach(m=>{ m.classList.remove('open'); document.body.style.overflow=''; });
+      closeLightbox();
+    }
+  });
+  const carouselState = {};
+  function getState(id){ if(!carouselState[id]) carouselState[id]={current:0,total:document.querySelectorAll('#track-'+id+' .carousel-slide').length}; return carouselState[id]; }
+  function updateCarousel(id){ const s=getState(id); document.getElementById('track-'+id).style.transform='translateX(-'+(s.current*100)+'%)'; document.querySelectorAll('#dots-'+id+' .dot').forEach((d,i)=>d.classList.toggle('active',i===s.current)); document.getElementById('counter-'+id).textContent=(s.current+1)+' / '+s.total+' — Click any image to zoom'; }
+  function moveCarousel(id,dir){ const s=getState(id); s.current=(s.current+dir+s.total)%s.total; updateCarousel(id); }
+  function goToSlide(id,idx){ getState(id).current=idx; updateCarousel(id); }
+  function openLightbox(src){ document.getElementById('lightbox-img').src=src; document.getElementById('lightbox').classList.add('open'); }
+  function closeLightbox(){ document.getElementById('lightbox').classList.remove('open'); document.getElementById('lightbox-img').src=''; }
+</script>
+</body>
+</html>
